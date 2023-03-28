@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
-@Table(name = "ENDPOINTHIT")
+@Table(name = "HITS")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHit {
     @Id
