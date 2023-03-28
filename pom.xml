@@ -23,8 +23,8 @@
 	</properties>
 
 	<modules>
-		<module>stat</module>
-		<module>main</module>
+		<module>ewn-stat</module>
+		<module>ewn-main</module>
 	</modules>
 
 	<build>
