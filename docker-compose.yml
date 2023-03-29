@@ -17,7 +17,7 @@
       image: postgres:14.6-alpine
       container_name: ewm_stats_db
       ports:
-        - "6541"
+        - "5432"
       environment:
         - POSTGRES_DB=stats-db
         - POSTGRES_USER=postgres
