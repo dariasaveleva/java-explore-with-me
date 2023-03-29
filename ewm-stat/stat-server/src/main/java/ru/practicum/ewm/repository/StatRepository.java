@@ -29,7 +29,7 @@ public interface StatRepository extends JpaRepository<EndpointHit, Long> {
             "and hit.timestamp <= :end " +
             "and hit.uri IN (:uris) " +
             "group by hit.app, hit.uri " +
-            "order by count(distinct hit.ip) desc")
+            "order by count(hit.ip) desc")
     List<Stat> getNotUniqueStat(@Param("start") LocalDateTime start,
                                 @Param("end") LocalDateTime end,
                                 @Param("uris") List<String> uris);
