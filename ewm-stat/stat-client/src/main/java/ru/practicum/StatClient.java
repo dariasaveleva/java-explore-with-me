@@ -1,23 +1,21 @@
 package ru.practicum;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.practicum.ewm.dto.EndpointHitDto;
 
 import java.util.List;
 
-@Service
+@Component
+@RequiredArgsConstructor
 public class StatClient {
     private final WebClient webClient;
-
-    public StatClient(WebClient webClient) {
-        this.webClient = webClient;
-    }
 
     public ResponseEntity<Object> post(EndpointHitDto endpointHitDto) {
         try {
