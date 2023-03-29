@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EndpointHitDto {
     Long id;
-    @NotNull
     @NotBlank
     String app;
     @NotNull
