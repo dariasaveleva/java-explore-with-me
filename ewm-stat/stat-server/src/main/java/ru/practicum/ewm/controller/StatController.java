@@ -1,4 +1,4 @@
-package ru.practicum.stat.controller;
+package ru.practicum.ewm.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.dto.EndpointHitDto;
 import ru.practicum.ewm.dto.ViewStatDto;
-import ru.practicum.stat.service.StatService;
+import ru.practicum.ewm.service.StatService;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
