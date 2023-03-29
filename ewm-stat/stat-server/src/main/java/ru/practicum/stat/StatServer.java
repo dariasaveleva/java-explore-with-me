@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 
 @SpringBootApplication
 public class StatServer {
+    public StatServer() {
+
+    }
     public static void main(String[] args) {
         SpringApplication.run(StatServer.class, args);
     }
