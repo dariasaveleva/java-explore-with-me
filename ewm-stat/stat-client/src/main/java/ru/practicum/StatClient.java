@@ -50,7 +50,7 @@ public class StatClient {
                             .queryParam("unique", unique)
                             .build())
                 .exchangeToMono(clientResponse -> {
-                    if(clientResponse.statusCode().is2xxSuccessful()) {
+                    if (clientResponse.statusCode().is2xxSuccessful()) {
                         return clientResponse.bodyToMono(Object.class)
                                 .map(body -> ResponseEntity.ok().body(body));
                     } else {
