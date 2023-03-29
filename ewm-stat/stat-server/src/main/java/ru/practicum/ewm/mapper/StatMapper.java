@@ -1,7 +1,7 @@
-package ru.practicum.stat.mapper;
+package ru.practicum.ewm.mapper;
 
 import ru.practicum.ewm.dto.ViewStatDto;
-import ru.practicum.stat.model.Stat;
+import ru.practicum.ewm.model.Stat;
 
 public class StatMapper {
 

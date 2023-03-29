@@ -1,4 +1,4 @@
-package ru.practicum.stat.service;
+package ru.practicum.ewm.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewm.dto.EndpointHitDto;
 import ru.practicum.ewm.dto.ViewStatDto;
-import ru.practicum.stat.mapper.EndpointHitMapper;
-import ru.practicum.stat.mapper.StatMapper;
-import ru.practicum.stat.model.EndpointHit;
-import ru.practicum.stat.repository.StatRepository;
+import ru.practicum.ewm.mapper.EndpointHitMapper;
+import ru.practicum.ewm.mapper.StatMapper;
+import ru.practicum.ewm.model.EndpointHit;
+import ru.practicum.ewm.repository.StatRepository;
 
 import java.time.LocalDateTime;
 import java.util.Collections;

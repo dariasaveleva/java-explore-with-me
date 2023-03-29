@@ -1,7 +1,7 @@
-package ru.practicum.stat.mapper;
+package ru.practicum.ewm.mapper;
 
 import ru.practicum.ewm.dto.EndpointHitDto;
-import ru.practicum.stat.model.EndpointHit;
+import ru.practicum.ewm.model.EndpointHit;
 
 public class EndpointHitMapper {
 

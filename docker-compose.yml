@@ -28,7 +28,7 @@
       image: ewm-main
       container_name: ewm_main_container
       ports:
-        - "8080"
+        - "8080:8080"
       depends_on:
         - ewm-db
         - stats-server
