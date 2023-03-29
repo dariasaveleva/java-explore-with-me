@@ -17,19 +17,18 @@
       image: postgres:14.6-alpine
       container_name: ewm_stats_db
       ports:
-        - "6541:5432"
+        - "6541"
       environment:
         - POSTGRES_DB=stats-db
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=iamroot
-
 
     ewm-service:
       build: ewm-main
       image: ewm-main
       container_name: ewm_main_container
       ports:
-        - "8080:8080"
+        - "8080"
       depends_on:
         - ewm-db
         - stats-server
@@ -45,5 +44,3 @@
         - "6542:5433"
       environment:
         - POSTGRES_DB=ewm-main-db
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=iamroot
