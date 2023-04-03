@@ -25,7 +25,7 @@ import java.util.List;
 
 @Validated
 @RestController
-@RequiredArgsConstructor(onConstructor_= @Autowired)
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @RequestMapping
 public class EventController {
 

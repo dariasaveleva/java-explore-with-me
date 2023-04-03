@@ -33,5 +33,6 @@ public interface EventService {
                                       Boolean paid, String rangeStart,
                                       String rangeEnd, Boolean onlyAvailable,
                                       String sort, Pageable page);
+
     EventDto findEventById(Long id, HttpServletRequest request);
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Validated
 @RestController
-@RequiredArgsConstructor(onConstructor_= @Autowired)
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @RequestMapping("/users/{userId}/requests")
 public class RequestController {
     private final RequestService service;

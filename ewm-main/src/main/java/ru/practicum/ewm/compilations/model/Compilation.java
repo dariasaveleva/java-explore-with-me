@@ -6,6 +6,7 @@ import ru.practicum.ewm.events.model.Event;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor

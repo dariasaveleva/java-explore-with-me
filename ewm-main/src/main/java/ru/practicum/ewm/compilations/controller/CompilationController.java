@@ -20,7 +20,7 @@ import java.util.List;
 @Validated
 @RequestMapping()
 @RestController
-@RequiredArgsConstructor(onConstructor_= @Autowired)
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CompilationController {
     final CompilationService service;

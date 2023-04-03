@@ -271,8 +271,7 @@ public class EventServiceImpl implements EventService {
     }
 
     public User checkUserExistence(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-        {
+        User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Пользователь, по которому запрашиваются события, не существует");
         });
         return user;
