@@ -82,7 +82,7 @@ public class EventServiceImpl implements EventService {
     public EventDto updateEventByUser(Long userId, Long eventId, EventUpdateRequestDto eventUpdate) {
         User user = checkUserExistence(userId);
         Event event = checkEventExistence(eventId);
-        if (event.getInitiator().getId().equals(userId)) {
+        if (!event.getInitiator().getId().equals(userId)) {
             throw new NotFoundException("Невозможно обновить чужое событие");
         }
         if (eventUpdate.getEventDate() != null) {
