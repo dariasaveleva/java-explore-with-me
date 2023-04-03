@@ -71,12 +71,12 @@ public class RequestServiceImpl implements RequestService {
 
         int confirmedRequests = requestRepository.findByEventIdConfirmed(eventId).size();
 
-        if(event.getParticipantLimit() != 0 && event.getParticipantLimit() <= confirmedRequests) {
+        if (event.getParticipantLimit() != 0 && event.getParticipantLimit() <= confirmedRequests) {
             throw new ConflictException("Нет свободных мест на данное мероприятие");
         }
         RequestStatus status = RequestStatus.PENDING;
 
-        if(!event.getRequestModeration() || event.getParticipantLimit() == 0) {
+        if (!event.getRequestModeration() || event.getParticipantLimit() == 0) {
             status = RequestStatus.CONFIRMED;
         }
 
@@ -160,8 +160,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     public User checkUserExistence(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() ->
-        {
+        User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Пользователь, по которому запрашиваются события, не существует");
         });
         return user;
