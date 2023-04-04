@@ -22,9 +22,9 @@ public class StatController {
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping("/stats")
-    public List<ViewStatDto> getStat(@RequestParam(required = false) String start,
-                                     @RequestParam(required = false) String end,
-                                     @RequestParam List<String> uris,
+    public List<ViewStatDto> getStat(@RequestParam String start,
+                                     @RequestParam String end,
+                                     @RequestParam(required = false) List<String> uris,
                                      @RequestParam(defaultValue = "false") Boolean unique) {
         return service.getStat(LocalDateTime.parse(start, DATE_FORMAT),
                                LocalDateTime.parse(end, DATE_FORMAT), uris, unique);

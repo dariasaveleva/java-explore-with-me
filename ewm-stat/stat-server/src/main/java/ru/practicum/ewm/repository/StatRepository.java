@@ -34,4 +34,19 @@ public interface StatRepository extends JpaRepository<EndpointHit, Long> {
                                 @Param("end") LocalDateTime end,
                                 @Param("uris") List<String> uris);
 
+    @Query("select new ru.practicum.ewm.model.Stat(hit.app, hit.uri, count(distinct hit.ip)) " +
+            "from EndpointHit hit " +
+            "where (hit.timestamp between :start and :end) " +
+            "group by hit.app, hit.uri " +
+            "order by count(distinct hit.ip) desc")
+    List<Stat> getUniqueStatsWithoutUri(@Param("start") LocalDateTime start,
+                                @Param("end") LocalDateTime end);
+
+    @Query("select new ru.practicum.ewm.model.Stat(hit.app, hit.uri, count(hit.ip)) " +
+            "from EndpointHit hit " +
+            "where (hit.timestamp between :start and :end) " +
+            "group by hit.app, hit.uri " +
+            "order by count(hit.ip) desc")
+    List<Stat> getNotUniqueStatsWithoutUri(@Param("start") LocalDateTime start,
+                                @Param("end") LocalDateTime end);
 }
