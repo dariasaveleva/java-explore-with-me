@@ -42,16 +42,16 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Transactional(readOnly = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EventServiceImpl implements EventService {
 
-    final StatClient statClient;
-    final EventRepository eventRepository;
-    final UserRepository userRepository;
-    final CategoryRepository categoryRepository;
-    final LocationRepository locationRepository;
-    final RequestRepository requestRepository;
-    final CriteriaApiEvent criteriaApiEvent;
+     StatClient statClient;
+     EventRepository eventRepository;
+     UserRepository userRepository;
+     CategoryRepository categoryRepository;
+     LocationRepository locationRepository;
+     RequestRepository requestRepository;
+     CriteriaApiEvent criteriaApiEvent;
 
     @Override
     public List<ShortEventDto> getEventByUser(Long id, PageRequest page) {

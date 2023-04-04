@@ -32,12 +32,12 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Transactional(readOnly = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RequestServiceImpl implements RequestService {
 
-    final RequestRepository requestRepository;
-    final UserRepository userRepository;
-    final EventRepository eventRepository;
+     RequestRepository requestRepository;
+     UserRepository userRepository;
+     EventRepository eventRepository;
 
     @Override
     public List<RequestDto> findByRequesterId(Long userId) {

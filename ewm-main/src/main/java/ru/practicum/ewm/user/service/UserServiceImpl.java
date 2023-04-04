@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Transactional(readOnly = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserServiceImpl implements UserService {
-    final UserRepository repository;
+     UserRepository repository;
 
     @Override
     public List<UserDto> findUsers(List<Long> ids, Pageable pageable) {
