@@ -13,7 +13,6 @@ import ru.practicum.ewm.model.EndpointHit;
 import ru.practicum.ewm.repository.StatRepository;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +27,16 @@ public class StatServiceImpl implements StatService {
     @Override
     public List<ViewStatDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
         log.info("Статистика найдена");
-        if (uris.isEmpty() || uris == null) return Collections.emptyList();
-        if (unique) {
+        if (uris == null || uris.isEmpty()) {
+            if (unique) {
+                return repository.getUniqueStatsWithoutUri(start, end).stream()
+                        .map(StatMapper::toStatDto).collect(Collectors.toList());
+            } else {
+                return repository.getNotUniqueStatsWithoutUri(start, end).stream()
+                        .map(StatMapper::toStatDto).collect(Collectors.toList());
+            }
+
+        } else if (unique) {
              return repository.getUniqueStat(start, end, uris).stream()
                      .map(StatMapper::toStatDto)
                      .collect(Collectors.toList());

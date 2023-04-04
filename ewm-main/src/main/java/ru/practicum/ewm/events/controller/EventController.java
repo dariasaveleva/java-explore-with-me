@@ -88,9 +88,10 @@ public class EventController {
                                              @RequestParam(required = false) Boolean onlyAvailable,
                                              @RequestParam(required = false) String sort,
                                              @PositiveOrZero @RequestParam(defaultValue = "0") int from,
-                                             @PositiveOrZero @RequestParam(defaultValue = "10") int size) {
+                                             @PositiveOrZero @RequestParam(defaultValue = "10") int size,
+                                             HttpServletRequest request) {
         PageRequest page = PageRequest.of(from / size, size);
-        return eventService.findEvents(text,categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, page);
+        return eventService.findEvents(text,categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, page, request);
     }
 
     @GetMapping("/events/{id}")

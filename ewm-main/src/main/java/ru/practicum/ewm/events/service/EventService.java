@@ -32,7 +32,7 @@ public interface EventService {
     List<ShortEventDto> findEvents(String text, List<Long> categories,
                                       Boolean paid, String rangeStart,
                                       String rangeEnd, Boolean onlyAvailable,
-                                      String sort, Pageable page);
+                                      String sort, Pageable page, HttpServletRequest request);
 
     EventDto findEventById(Long id, HttpServletRequest request);
 }

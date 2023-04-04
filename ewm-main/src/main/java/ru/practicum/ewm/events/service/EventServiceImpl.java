@@ -9,10 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.StatClient;
 import ru.practicum.ewm.categories.model.Category;
 import ru.practicum.ewm.categories.repository.CategoryRepository;
 import ru.practicum.ewm.common.exception.ConflictException;
 import ru.practicum.ewm.common.exception.NotFoundException;
+import ru.practicum.ewm.dto.EndpointHitDtoCreation;
 import ru.practicum.ewm.events.LocationRepository;
 import ru.practicum.ewm.events.dto.EventDto;
 import ru.practicum.ewm.events.dto.EventDtoCreation;
@@ -43,6 +45,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventServiceImpl implements EventService {
 
+    final StatClient statClient;
     final EventRepository eventRepository;
     final UserRepository userRepository;
     final CategoryRepository categoryRepository;
@@ -214,7 +217,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<ShortEventDto> findEvents(String text, List<Long> categories, Boolean paid,
                                              String rangeStart, String rangeEnd,
-                                             Boolean onlyAvailable, String sort, Pageable page) {
+                                             Boolean onlyAvailable, String sort, Pageable page, HttpServletRequest request) {
         LocalDateTime start = null;
         LocalDateTime end = null;
 
@@ -226,7 +229,8 @@ public class EventServiceImpl implements EventService {
         }
 
         if (text == null) text = "";
-
+        log.info("Найден список событий");
+        sendStatistics(request);
         return eventRepository.findByParamsOrderByDate(text.toLowerCase(), List.of(EventState.PUBLISHED),
                 categories, paid, start, end, page).stream()
                 .map(EventMapper::toShortEventDto)
@@ -239,6 +243,7 @@ public class EventServiceImpl implements EventService {
         EventDto eventDto = EventMapper.toEventDto(event);
         eventDto.setConfirmedRequests(requestRepository
                 .findAllByEventIdAndStatus(event.getId(), RequestStatus.CONFIRMED).size());
+        sendStatistics(request);
         log.info("Событие найдено");
         return eventDto;
     }
@@ -270,24 +275,34 @@ public class EventServiceImpl implements EventService {
         return eventState;
     }
 
-    public User checkUserExistence(Long id) {
+    private User checkUserExistence(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> {
             throw new NotFoundException("Пользователь, по которому запрашиваются события, не существует");
         });
         return user;
     }
 
-    public Event checkEventExistence(Long eventId) {
+    private Event checkEventExistence(Long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> {
             throw new NotFoundException("Событие не существует");
         });
         return event;
     }
 
-    public Category checkCategoryExistence(Long categoryId) {
+    private Category checkCategoryExistence(Long categoryId) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> {
             throw new NotFoundException("Категория не существует");
         });
         return category;
+    }
+
+    private void sendStatistics(HttpServletRequest request) {
+        statClient.post(
+                new EndpointHitDtoCreation(
+                "ewm",
+                request.getRequestURI(),
+                request.getRemoteAddr(),
+                LocalDateTime.now()
+        ));
     }
 }

@@ -2,6 +2,7 @@ package ru.practicum;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,21 +10,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ru.practicum.ewm.dto.EndpointHitDto;
+import ru.practicum.ewm.dto.EndpointHitDtoCreation;
 
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class StatClient {
     private final WebClient webClient;
 
-    public ResponseEntity<Object> post(EndpointHitDto endpointHitDto) {
+    public ResponseEntity<Object> post(EndpointHitDtoCreation endpointHitDtoCreation) {
 
         return webClient.post()
                     .uri("/hit")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(BodyInserters.fromValue(endpointHitDto))
+                    .body(BodyInserters.fromValue(endpointHitDtoCreation))
                     .exchangeToMono(clientResponse -> {
                     if (clientResponse.statusCode().equals(HttpStatus.CREATED)) {
                         return clientResponse.bodyToMono(Object.class)
