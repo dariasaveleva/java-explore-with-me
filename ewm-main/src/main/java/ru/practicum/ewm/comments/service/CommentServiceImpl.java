@@ -68,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto updateComment(Long commentId, Long userId, CommentDtoUpdate commentDtoUpdate) {
         Comment comment = checkCommentExistence(commentId);
         User user = checkUserExistence(userId);
-        if (userId.equals(comment.getAuthor().getId())) {
+        if (!userId.equals(comment.getAuthor().getId())) {
             throw new ConflictException("Нельзя отредактировать чужой комментарий");
         }
 
