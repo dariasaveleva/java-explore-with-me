@@ -10,7 +10,7 @@ public class CommentMapper {
 
     public static Comment toComment(CommentDto commentDto, Event event) {
         return new Comment(
-                null,
+                commentDto.getId(),
                 commentDto.getCreated(),
                 event,
                 commentDto.getAuthor(),
@@ -30,6 +30,7 @@ public class CommentMapper {
 
     public static CommentDto toCommentDto(Comment comment) {
         return new CommentDto(
+                comment.getId(),
                 comment.getCreated(),
                 comment.getEvent().getId(),
                 comment.getAuthor(),
