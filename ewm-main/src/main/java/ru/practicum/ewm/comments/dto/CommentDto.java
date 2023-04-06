@@ -19,9 +19,9 @@ public class CommentDto {
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime created;
-    @NotBlank
+    @NotNull
     Long eventId;
-    @NotBlank
+    @NotNull
     User author;
     @NotBlank
     String text;
